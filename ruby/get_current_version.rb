@@ -6,6 +6,8 @@ puts "The url of which box of this user do you want?"
 var2 = gets
 
 require "http"
+require "json"
+require "rubygems"
 
 api = HTTP.persistent("https://app.vagrantup.com").headers(
   "Authorization" => "Bearer #{ENV['VAGRANT_CLOUD_TOKEN']}"
@@ -18,7 +20,7 @@ response = api.get("/api/v1/search", params: {
 
 if response.status.success?
   # Success, the response attributes are available here.
-  p response.parse
+  p response.parse["boxes"]
 else
   # Error, inspect the `errors` key for more information.
   p response.code, response.body
