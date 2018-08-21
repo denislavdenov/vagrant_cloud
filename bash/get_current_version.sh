@@ -14,6 +14,6 @@ read var2
 # grab downloar_url
 
 curl -sL \
-  https://app.vagrantup.com/api/v1/box/${var1}/${var2} | jq '.current_version.providers[0] .download_url'
+  https://app.vagrantup.com/api/v1/box/${var1}/${var2} | jq '.current_version.providers[] .download_url'
 
 echo ${?}
