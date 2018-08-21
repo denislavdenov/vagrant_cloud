@@ -11,5 +11,6 @@ url = "https://app.vagrantup.com/api/v1/box/" + user + "/" + boxx
 
 data = urllib.urlopen(url).read()
 output = json.loads(data)
-print output["versions"][0]["providers"][0]["download_url"]
-
+#print output["versions"][0]["providers"]
+for item in output["versions"][0]["providers"]:
+    print item["download_url"]
