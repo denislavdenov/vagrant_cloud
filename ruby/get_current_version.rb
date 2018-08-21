@@ -15,12 +15,17 @@ api = HTTP.persistent("https://app.vagrantup.com").headers(
 
 response = api.get("/api/v1/search", params: {
   q: "#{var1}/#{var2}",
-  provider: "virtualbox"
+  provider: "vmware_desktop"
 })
 
 if response.status.success?
   # Success, the response attributes are available here.
-  p response.parse["boxes"][0]["current_version"]["providers"][0]["download_url"]
+	json=response.parse["boxes"][0]["current_version"]["providers"]
+		json.each do |item|
+	          item.each do |key,value|
+			p value if key == "download_url"
+		  end
+		end
 else
   # Error, inspect the `errors` key for more information.
   p response.code, response.body
