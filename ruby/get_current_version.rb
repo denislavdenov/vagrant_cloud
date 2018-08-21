@@ -20,7 +20,7 @@ response = api.get("/api/v1/search", params: {
 
 if response.status.success?
   # Success, the response attributes are available here.
-  p response.parse["boxes"]
+  p response.parse["boxes"][0]["current_version"]["providers"][0]["download_url"]
 else
   # Error, inspect the `errors` key for more information.
   p response.code, response.body
