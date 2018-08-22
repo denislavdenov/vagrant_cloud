@@ -1,6 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+//	"encoding/json"
+	"net/http"
+//	"bytes"
+	"io/ioutil"
+)
+
+
 
 func main() {
 
@@ -13,8 +21,25 @@ func main() {
   fmt.Print("The url of which box do you want?:")
   fmt.Scanf("%s", &box)
 //grab json from api call
-  fmt.Println("You want the box of", user)
-  fmt.Println(box)
+
+var url1 string = "https://app.vagrantup.com/api/v1/box/"
+
+	url1 = url1 + "/" + user + "/" + box
+
+response, err := http.Get(url1)
+    if err != nil {
+        fmt.Printf("The HTTP request failed with error %s\n", err)
+    } else {
+        data, _ := ioutil.ReadAll(response.Body)
+        fmt.Println(string(data))
+    }
+
+
+
 // filter json and output urls
 
+
 }
+
+
+
